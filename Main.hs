@@ -23,6 +23,14 @@ main = scotty 3000 $ do
     program <- param "program"
     text $ mconcat ["Computer: Start holodeck program ", program ]
     -- Todo how to have optional parameters?
+  
+  -- Agent
+  get "/agent" $ do
+    agent <- header "User-Agent"
+    text $ case agent of 
+        Just a -> a
+        Nothing -> "No agent"
+
 
   notFound $ do
     text "404: Page not Found. Sorry :<" 
