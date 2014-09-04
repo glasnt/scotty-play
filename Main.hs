@@ -7,6 +7,10 @@ import qualified Text.Blaze.Html5              as H
 import qualified Text.Blaze.Html5.Attributes   as A 
 import           Text.Blaze.Html.Renderer.Text
 
+import qualified Views.Index
+
+blaze = html . renderHtml
+
 main = scotty 3000 $ do
 
   -- Home
@@ -48,6 +52,10 @@ main = scotty 3000 $ do
   get "/fancy" $ do
     html . renderHtml $ do
       H.h1 "Fancy!"
+
+  -- Super View Fancy
+  get "/view" $ do
+    blaze Views.Index.render
 
   notFound $ do
     text "404: Page not Found. Sorry :<" 
