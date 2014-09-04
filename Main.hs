@@ -1,7 +1,8 @@
 {-# LANGUAGE OverloadedStrings #-}
-import Web.Scotty
-import qualified Data.Text as T
-import Data.Monoid (mconcat)
+import           Web.Scotty
+import qualified Data.Text          as T
+import           Data.Monoid        (mconcat)
+import           Network.HTTP.Types
 
 main = scotty 3000 $ do
 
@@ -23,6 +24,11 @@ main = scotty 3000 $ do
     program <- param "program"
     text $ mconcat ["Computer: Start holodeck program ", program ]
     -- Todo how to have optional parameters?
+
+  -- 302 redirect
+  get "/redirect-custom" $ do
+    status status302
+    setHeader "Location" "https://github.com"
   
   -- Agent
   get "/agent" $ do
