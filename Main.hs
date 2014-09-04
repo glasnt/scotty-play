@@ -29,6 +29,9 @@ main = scotty 3000 $ do
   get "/redirect-custom" $ do
     status status302
     setHeader "Location" "https://github.com"
+
+  get "/json" $ do
+    json ("{hi: 'there'}" :: String)
   
   -- Agent
   get "/agent" $ do
