@@ -6,12 +6,14 @@ import           Network.HTTP.Types
 import qualified Text.Blaze.Html5              as H
 import qualified Text.Blaze.Html5.Attributes   as A 
 import           Text.Blaze.Html.Renderer.Text
+import           Network.Wai.Middleware.RequestLogger
 
 import qualified Views.Index
 
 blaze = html . renderHtml
 
 main = scotty 3000 $ do
+  middleware logStdoutDev
 
   -- Home
   get "/" $ do
