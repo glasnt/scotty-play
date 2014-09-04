@@ -1,8 +1,11 @@
 {-# LANGUAGE OverloadedStrings #-}
 import           Web.Scotty
-import qualified Data.Text          as T
-import           Data.Monoid        (mconcat)
+import qualified Data.Text                     as T
+import           Data.Monoid                   (mconcat)
 import           Network.HTTP.Types
+import qualified Text.Blaze.Html5              as H
+import qualified Text.Blaze.Html5.Attributes   as A 
+import           Text.Blaze.Html.Renderer.Text
 
 main = scotty 3000 $ do
 
@@ -40,6 +43,11 @@ main = scotty 3000 $ do
         Just a -> a
         Nothing -> "No agent"
 
+
+  --Fancy
+  get "/fancy" $ do
+    html . renderHtml $ do
+      H.h1 "Fancy!"
 
   notFound $ do
     text "404: Page not Found. Sorry :<" 
